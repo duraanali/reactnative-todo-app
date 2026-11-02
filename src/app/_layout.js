@@ -1,23 +1,37 @@
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { Drawer } from "expo-router/drawer";
+import { Tabs } from "expo-router";
+import { StatusBar } from "expo-status-bar";
+import { Text } from "react-native";
 
-// The ROOT layout is a Drawer — the ☰ side menu. It has two items:
-//   • "(tabs)"   → the tabbed area (which has its own bottom tabs)
-//   • "settings" → a plain screen that only lives in the drawer
+// Each file next to this layout is a screen. Tabs shows one at a time
+// and puts a button for each along the bottom. index.js opens first.
 export default function RootLayout() {
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <Drawer
+    <>
+      <StatusBar style="light" />
+      <Tabs
         screenOptions={{
           headerStyle: { backgroundColor: "#4f46e5" },
           headerTintColor: "#ffffff",
           headerTitleStyle: { fontWeight: "700" },
-          drawerActiveTintColor: "#4f46e5",
+          tabBarActiveTintColor: "#4f46e5",
         }}
       >
-        <Drawer.Screen name="(tabs)" options={{ title: "My To-Dos", drawerLabel: "To-Dos" }} />
-        <Drawer.Screen name="settings" options={{ title: "Settings", drawerLabel: "Settings" }} />
-      </Drawer>
-    </GestureHandlerRootView>
+        <Tabs.Screen
+          name="index"
+          options={{
+            title: "My To-Dos",
+            tabBarLabel: "To-Dos",
+            tabBarIcon: ({ color }) => <Text style={{ fontSize: 18, color }}>📝</Text>,
+          }}
+        />
+        <Tabs.Screen
+          name="about"
+          options={{
+            title: "About",
+            tabBarIcon: ({ color }) => <Text style={{ fontSize: 18, color }}>ℹ️</Text>,
+          }}
+        />
+      </Tabs>
+    </>
   );
 }

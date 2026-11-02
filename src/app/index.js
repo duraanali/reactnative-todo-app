@@ -8,6 +8,8 @@ import {
   StyleSheet,
 } from "react-native";
 
+// No HTML here. View is the box, Text is the only way to show words,
+// TextInput is the field, Pressable is the button, FlatList is the list.
 export default function Home() {
   const [text, setText] = useState("");
   const [todos, setTodos] = useState([
@@ -31,7 +33,6 @@ export default function Home() {
 
   return (
     <View style={styles.screen}>
-      {/* Add a task */}
       <View style={styles.inputRow}>
         <TextInput
           style={styles.input}
@@ -49,13 +50,12 @@ export default function Home() {
 
       <Text style={styles.count}>{remaining} left to do</Text>
 
-      {/* The list of tasks */}
       <FlatList
         data={todos}
         keyExtractor={(item) => item.id}
         contentContainerStyle={styles.list}
         ListEmptyComponent={
-          <Text style={styles.empty}>Nothing yet — add your first task! 🎉</Text>
+          <Text style={styles.empty}>Nothing yet — add your first task!</Text>
         }
         renderItem={({ item }) => (
           <View style={styles.card}>
@@ -77,14 +77,15 @@ export default function Home() {
   );
 }
 
+// No CSS file. Names are camelCase, numbers are density-independent pixels,
+// and flexbox runs down the screen until you set flexDirection: "row".
 const styles = StyleSheet.create({
-  // Keep everything in a phone-width column, centered — so it looks like an
-  // app on any screen (a phone fills it; a wide screen shows a centered column).
   screen: {
     flex: 1,
     width: "100%",
     maxWidth: 480,
     alignSelf: "center",
+    backgroundColor: "#f4f5fb",
     paddingHorizontal: 20,
     paddingTop: 18,
     gap: 16,
@@ -111,7 +112,14 @@ const styles = StyleSheet.create({
   },
   addButtonText: { color: "#ffffff", fontWeight: "700", fontSize: 16 },
 
-  count: { color: "#6b7086", fontSize: 13, fontWeight: "700", marginLeft: 2, textTransform: "uppercase", letterSpacing: 0.5 },
+  count: {
+    color: "#6b7086",
+    fontSize: 13,
+    fontWeight: "700",
+    marginLeft: 2,
+    textTransform: "uppercase",
+    letterSpacing: 0.5,
+  },
 
   list: { gap: 12, paddingBottom: 28 },
   empty: { textAlign: "center", color: "#8a8fa3", marginTop: 48, fontSize: 15 },
@@ -124,7 +132,6 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     paddingVertical: 16,
     paddingHorizontal: 16,
-    // a soft shadow (iOS) + elevation (Android)
     shadowColor: "#1f2233",
     shadowOpacity: 0.07,
     shadowRadius: 10,
